@@ -10,7 +10,23 @@ Route::view('/', 'welcome')->name('home');
 
 Route::get('/register', function () {
     return view('auth.register');
-});
+})->name('register');
+
+Route::post('/register', function (Request $request) {
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    ]);
+
+    App\Models\User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => $validated['password'],
+    ]);
+
+    return redirect()->route('login')->with('success', 'Pendaftaran berhasil. Silakan login terlebih dahulu.');
+})->name('register.store');
 
 // Login routes
 Route::get('/login', function () {

@@ -114,7 +114,18 @@
                     </p>
                 </div>
 
-                <form>
+                <form action="{{ route('register.store') }}" method="POST">
+                    @csrf
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <div class="mb-3">
                         <label class="form-label">
@@ -122,8 +133,14 @@
                         </label>
 
                         <input type="text"
-                               class="form-control"
-                               placeholder="Masukkan nama lengkap">
+                               name="name"
+                               class="form-control @error('name') is-invalid @enderror"
+                               placeholder="Masukkan nama lengkap"
+                               value="{{ old('name') }}"
+                               required>
+                        @error('name')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -132,18 +149,14 @@
                         </label>
 
                         <input type="email"
-                               class="form-control"
-                               placeholder="Masukkan email">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">
-                            No HP
-                        </label>
-
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Masukkan nomor HP">
+                               name="email"
+                               class="form-control @error('email') is-invalid @enderror"
+                               placeholder="Masukkan email"
+                               value="{{ old('email') }}"
+                               required>
+                        @error('email')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -152,8 +165,13 @@
                         </label>
 
                         <input type="password"
-                               class="form-control"
-                               placeholder="Masukkan password">
+                               name="password"
+                               class="form-control @error('password') is-invalid @enderror"
+                               placeholder="Masukkan password"
+                               required>
+                        @error('password')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-4">
@@ -162,8 +180,10 @@
                         </label>
 
                         <input type="password"
+                               name="password_confirmation"
                                class="form-control"
-                               placeholder="Konfirmasi password">
+                               placeholder="Konfirmasi password"
+                               required>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
