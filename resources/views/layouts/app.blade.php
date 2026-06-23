@@ -174,6 +174,11 @@
                             <i class="fas fa-cog"></i> Pengaturan
                         </a>
                     </li>
+                    <a href="{{ route('profil') }}"
+       class="{{ request()->routeIs('profil') ? 'active' : '' }}">
+        <i class="fa-solid fa-circle-user"></i>
+        Profil
+    </a>
                 </ul>
             </nav>
 

@@ -32,3 +32,4 @@ Route::post('/login', function (Request $request) {
 })->name('login.attempt');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/profil', function () { return view('profil.index'); })->name('profil');
