@@ -28,15 +28,24 @@
             box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
             border-bottom: 1px solid #e3e6f0;
             z-index: 1030;
+            align-items: center;
+            min-height: 68px;
         }
 
-        /* PERBAIKAN DI SINI: Ditambahkan display inline-block dan margin-top agar teks terdorong ke bawah */
         .navbar-brand {
             font-weight: bold;
             color: var(--primary) !important;
             font-size: 1.25rem;
-            display: inline-block;
-            margin-top: 8px !important; 
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            transform: translateY(1px);
         }
 
         /* --- Perbaikan Struktur & Animasi Sidebar --- */
@@ -215,7 +224,7 @@ footer{
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link"
+                        <a class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}"
                            href="{{ Auth::user()->role == 'admin' ? route('dashboard.admin') : route('dashboard.user') }}">
                             <i class="fas fa-tachometer-alt"></i> Dashboard
                         </a>

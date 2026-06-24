@@ -82,14 +82,40 @@ Route::get('/dashboard-user', function () {
     return view('dashboard.penyewa');
 })->name('dashboard.user');
 
+Route::view('/kamar', 'user.kamar')->name('kamar');
+Route::view('/pembayaran', 'user.pembayaran')->name('pembayaran');
+Route::view('/kontrak', 'user.kontrak')->name('kontrak');
+
 Route::get('/profil', function () {
-
     return view('profile.index');
-
 })->name('profil');
 
+Route::get('/profil/edit', function () {
+    return view('profile.edit');
+})->name('profil.edit');
+
+Route::patch('/profil', function (Request $request) {
+    $user = Auth::user();
+
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
+        'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+    ]);
+
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];
+
+    if (!empty($validated['password'])) {
+        $user->password = $validated['password'];
+    }
+
+    $user->save();
+
+    return redirect()->route('profil')
+        ->with('success', 'Profil berhasil diperbarui.');
+})->name('profil.update');
+
 Route::get('/profil-admin', function () {
-
     return view('profile.admin');
-
 })->name('profil.admin');

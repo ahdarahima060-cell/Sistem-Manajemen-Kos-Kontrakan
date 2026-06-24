@@ -27,7 +27,8 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card shadow-sm h-100 border-0">
+            <div class="card shadow-sm h-100 border-0 position-relative">
+                <a href="{{ route('kamar') }}" class="stretched-link"></a>
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
                         <div class="icon bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3">
@@ -44,7 +45,8 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card shadow-sm h-100 border-0">
+            <div class="card shadow-sm h-100 border-0 position-relative">
+                <a href="{{ route('pembayaran') }}" class="stretched-link"></a>
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
                         <div class="icon bg-danger bg-opacity-10 text-danger rounded-circle p-3 me-3">
@@ -61,7 +63,8 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card shadow-sm h-100 border-0">
+            <div class="card shadow-sm h-100 border-0 position-relative">
+                <a href="{{ route('kontrak') }}" class="stretched-link"></a>
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
                         <div class="icon bg-success bg-opacity-10 text-success rounded-circle p-3 me-3">
@@ -78,7 +81,8 @@
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="card shadow-sm h-100 border-0">
+            <div class="card shadow-sm h-100 border-0 position-relative">
+                <a href="{{ route('profil') }}" class="stretched-link"></a>
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
                         <div class="icon bg-info bg-opacity-10 text-info rounded-circle p-3 me-3">
