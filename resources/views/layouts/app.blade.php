@@ -217,7 +217,12 @@
                 <i class="fas fa-door-open"></i> Kamar
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('notifikasi*') ? 'active' : '' }}"
+               href="/notifikasi">
+                <i class="fas fa-bell"></i> Notifikasi
+            </a>
+        </li>
         @if(Auth::check() && Auth::user()->role == 'admin')
 
             <li class="nav-item">
@@ -251,7 +256,6 @@
 
     </ul>
 </nav>
-
             <main class="main-content">
                 @yield('content')
             </main>
