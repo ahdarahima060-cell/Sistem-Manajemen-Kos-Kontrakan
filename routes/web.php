@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -82,7 +83,12 @@ Route::get('/dashboard-user', function () {
     return view('dashboard.penyewa');
 })->name('dashboard.user');
 
-Route::view('/kamar', 'user.kamar')->name('kamar');
+Route::get('/kamar', [RoomController::class, 'index'])->name('kamar');
+Route::post('/kamar', [RoomController::class, 'store'])->name('kamar.store');
+Route::get('/kamar/{id}/edit', [RoomController::class, 'edit'])->name('kamar.edit');
+Route::patch('/kamar/{id}', [RoomController::class, 'update'])->name('kamar.update');
+Route::delete('/kamar/{id}', [RoomController::class, 'destroy'])->name('kamar.destroy');
+
 Route::view('/pembayaran', 'user.pembayaran')->name('pembayaran');
 Route::view('/kontrak', 'user.kontrak')->name('kontrak');
 
@@ -110,7 +116,6 @@ Route::patch('/profil', function (Request $request) {
         $user->password = $validated['password'];
     }
 
-    $user->save();
 
     return redirect()->route('profil')
         ->with('success', 'Profil berhasil diperbarui.');
