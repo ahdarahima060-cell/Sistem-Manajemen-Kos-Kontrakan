@@ -83,5 +83,13 @@ Route::get('/dashboard-user', function () {
 })->name('dashboard.user');
 
 Route::get('/profil', function () {
-    return view('profil.index');
+
+    return view('profile.index');
+
 })->name('profil');
+
+Route::get('/profil-admin', function () {
+
+    return view('profile.admin');
+
+})->name('profil.admin');

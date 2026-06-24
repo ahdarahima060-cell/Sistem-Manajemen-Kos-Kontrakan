@@ -30,10 +30,13 @@
             z-index: 1030;
         }
 
+        /* PERBAIKAN DI SINI: Ditambahkan display inline-block dan margin-top agar teks terdorong ke bawah */
         .navbar-brand {
             font-weight: bold;
             color: var(--primary) !important;
             font-size: 1.25rem;
+            display: inline-block;
+            margin-top: 8px !important; 
         }
 
         /* --- Perbaikan Struktur & Animasi Sidebar --- */
@@ -140,15 +143,21 @@
             border-color: var(--dark);
         }
 
-        footer {
-            background-color: white;
-            border-top: 1px solid #e3e6f0;
-            padding: 20px;
-            margin-top: 40px;
-            text-align: center;
-            color: var(--secondary);
-            transition: margin-left 0.3s ease-in-out;
-        }
+footer{
+
+    background:white;
+
+    border-top:1px solid #e3e6f0;
+
+    padding:40px 20px 20px 20px;
+
+    margin-top:200px;
+
+    text-align:center;
+
+    color:var(--secondary);
+
+}
 
         @media (min-width: 992px) {
             body.sidebar-open footer {
@@ -159,13 +168,14 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container-fluid">
-            <button class="sidebar-toggle me-2" type="button" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+            
+            <button class="sidebar-toggle me-2 pt-2" type="button" onclick="toggleSidebar()" aria-label="Toggle sidebar">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand pt-2" href="/">
                 <i class="fas fa-building"></i> Manajemen Kos Thursina
             </a>
             
@@ -195,67 +205,67 @@
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="sidebar">
-    <ul class="nav flex-column">
+                <ul class="nav flex-column">
 
-        <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('profil') ? 'active' : '' }}"
-               href="{{ route('profil') }}">
-                <i class="fa-solid fa-circle-user"></i> Profil
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('profil*') ? 'active' : '' }}"
+                           href="{{ Auth::user()->role === 'admin' ? route('profil.admin') : route('profil') }}">
+                            <i class="fa-solid fa-circle-user"></i> Profil
+                        </a>
+                    </li>
 
-        <li class="nav-item">
-            <a class="nav-link"
-               href="{{ Auth::user()->role == 'admin' ? route('dashboard.admin') : route('dashboard.user') }}">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
-            </a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ Auth::user()->role == 'admin' ? route('dashboard.admin') : route('dashboard.user') }}">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
 
-        <li class="nav-item">
-            <a class="nav-link {{ request()->is('kamar*') ? 'active' : '' }}"
-               href="/kamar">
-                <i class="fas fa-door-open"></i> Kamar
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link {{ request()->is('notifikasi*') ? 'active' : '' }}"
-               href="/notifikasi">
-                <i class="fas fa-bell"></i> Notifikasi
-            </a>
-        </li>
-        @if(Auth::check() && Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('kamar*') ? 'active' : '' }}"
+                           href="/kamar">
+                            <i class="fas fa-door-open"></i> Kamar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('notifikasi*') ? 'active' : '' }}"
+                           href="/notifikasi">
+                            <i class="fas fa-bell"></i> Notifikasi
+                        </a>
+                    </li>
+                    @if(Auth::check() && Auth::user()->role == 'admin')
 
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('penyewa*') ? 'active' : '' }}"
-                   href="/penyewa">
-                    <i class="fas fa-users"></i> Penyewa & Kontrak
-                </a>
-            </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('penyewa*') ? 'active' : '' }}"
+                               href="/penyewa">
+                                <i class="fas fa-users"></i> Penyewa & Kontrak
+                            </a>
+                        </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('pembayaran*') ? 'active' : '' }}"
-                   href="/pembayaran">
-                    <i class="fas fa-money-bill-wave"></i> Pembayaran
-                </a>
-            </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('pembayaran*') ? 'active' : '' }}"
+                               href="/pembayaran">
+                                <i class="fas fa-money-bill-wave"></i> Pembayaran
+                            </a>
+                        </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('laporan*') ? 'active' : '' }}"
-                   href="/laporan">
-                    <i class="fas fa-chart-bar"></i> Laporan
-                </a>
-            </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('laporan*') ? 'active' : '' }}"
+                               href="/laporan">
+                                <i class="fas fa-chart-bar"></i> Laporan
+                            </a>
+                        </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-cog"></i> Pengaturan
-                </a>
-            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-cog"></i> Pengaturan
+                            </a>
+                        </li>
 
-        @endif
+                    @endif
 
-    </ul>
-</nav>
+                </ul>
+            </nav>
             <main class="main-content">
                 @yield('content')
             </main>
