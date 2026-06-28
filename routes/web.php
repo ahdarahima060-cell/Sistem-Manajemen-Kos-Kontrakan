@@ -96,7 +96,11 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::view('/pembayaran', 'user.pembayaran')->name('pembayaran');
+Route::get('/pembayaran', function () {
+    $pembayaran = null;
+    return view('user.pembayaran', compact('pembayaran'));
+})->name('pembayaran');
+
 Route::view('/kontrak', 'user.kontrak')->name('kontrak');
 
 Route::get('/profil', function () {
