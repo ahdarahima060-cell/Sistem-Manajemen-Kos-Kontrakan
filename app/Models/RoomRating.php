@@ -13,13 +13,18 @@ class RoomRating extends Model
 
     protected $fillable = [
         'room_id',
+        'contract_id',
         'rating',
-        'review',
-        'reviewer_name',
+        'comment',
     ];
 
     public function room()
     {
         return $this->belongsTo(RentalRoom::class, 'room_id');
+    }
+
+    public function contract()
+    {
+        return $this->belongsTo(TenantContract::class, 'contract_id');
     }
 }

@@ -237,6 +237,18 @@ footer{
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ request()->is('statuspembayaran*') ? 'active' : '' }}"
+                        href="/statuspembayaran">
+                            <i class="fas fa-credit-card"></i> Status Pembayaran
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('kontraksewa*') ? 'active' : '' }}"
+                        href="/kontraksewa">
+                            <i class="fas fa-file-contract"></i> Kontrak Sewa
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ request()->is('notifikasi*') ? 'active' : '' }}"
                            href="/notifikasi">
                             <i class="fas fa-bell"></i> Notifikasi

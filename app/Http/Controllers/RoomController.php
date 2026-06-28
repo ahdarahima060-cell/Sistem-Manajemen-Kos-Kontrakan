@@ -4,18 +4,60 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RentalRoom;
+use App\Models\RoomRating;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    protected function ensureAdmin()
+    {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            abort(403);
+        }
+    }
+
     public function index()
     {
         $rooms = RentalRoom::orderBy('id')->get();
         return view('kamar.kamar', compact('rooms'));
     }
 
+    public function show($id)
+    {
+        $room = RentalRoom::with('ratings')->findOrFail($id);
+        $averageRating = round($room->ratings->avg('rating') ?: 0, 1);
+        return view('kamar.show', compact('room', 'averageRating'));
+    }
+
+    public function rate(Request $request, $id)
+    {
+        $room = RentalRoom::findOrFail($id);
+
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:1000',
+        ]);
+
+        RoomRating::create([
+            'room_id' => $room->id,
+            'rating' => $validated['rating'],
+            'comment' => $validated['comment'] ?? null,
+            'contract_id' => null,
+        ]);
+
+        return redirect()->route('kamar.show', $room->id)->with('success', 'Terima kasih! Rating kamar berhasil dikirim.');
+    }
+
     public function store(Request $request)
     {
+        $this->ensureAdmin();
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:100',
@@ -50,12 +92,16 @@ class RoomController extends Controller
 
     public function edit($id)
     {
+        $this->ensureAdmin();
+
         $room = RentalRoom::findOrFail($id);
         return view('kamar.edit', compact('room'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->ensureAdmin();
+
         $room = RentalRoom::findOrFail($id);
 
         $validated = $request->validate([
@@ -93,6 +139,8 @@ class RoomController extends Controller
 
     public function destroy($id)
     {
+        $this->ensureAdmin();
+
         $room = RentalRoom::findOrFail($id);
         if ($room->photo) {
             Storage::disk('public')->delete($room->photo);

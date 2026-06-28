@@ -35,8 +35,8 @@
                             <i class="fas fa-door-open fa-lg"></i>
                         </div>
                         <div>
-                            <h6 class="mb-1 text-uppercase text-muted">Kamar Saya</h6>
-                            <h4 class="mb-0">1 Unit</h4>
+                            <h6 class="mb-1 text-uppercase text-muted">Kamar</h6>
+                            <h4 class="mb-0">7 Unit</h4>
                         </div>
                     </div>
                     <p class="text-secondary small mb-0">Detail kamar yang Anda tempati dan riwayat fasilitas.</p>

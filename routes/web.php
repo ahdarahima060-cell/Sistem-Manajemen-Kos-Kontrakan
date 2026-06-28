@@ -83,11 +83,18 @@ Route::get('/dashboard-user', function () {
     return view('dashboard.penyewa');
 })->name('dashboard.user');
 
-Route::get('/kamar', [RoomController::class, 'index'])->name('kamar');
-Route::post('/kamar', [RoomController::class, 'store'])->name('kamar.store');
-Route::get('/kamar/{id}/edit', [RoomController::class, 'edit'])->name('kamar.edit');
-Route::patch('/kamar/{id}', [RoomController::class, 'update'])->name('kamar.update');
-Route::delete('/kamar/{id}', [RoomController::class, 'destroy'])->name('kamar.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/kamar', [RoomController::class, 'index'])->name('kamar');
+    Route::get('/kamar/{id}', [RoomController::class, 'show'])->name('kamar.show');
+    Route::post('/kamar/{id}/rating', [RoomController::class, 'rate'])->name('kamar.rate');
+
+    Route::middleware('can:manage-kamar')->group(function () {
+        Route::post('/kamar', [RoomController::class, 'store'])->name('kamar.store');
+        Route::get('/kamar/{id}/edit', [RoomController::class, 'edit'])->name('kamar.edit');
+        Route::patch('/kamar/{id}', [RoomController::class, 'update'])->name('kamar.update');
+        Route::delete('/kamar/{id}', [RoomController::class, 'destroy'])->name('kamar.destroy');
+    });
+});
 
 Route::view('/pembayaran', 'user.pembayaran')->name('pembayaran');
 Route::view('/kontrak', 'user.kontrak')->name('kontrak');

@@ -6,37 +6,54 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
+
         Schema::create('room_ratings', function (Blueprint $table) {
+
             $table->id();
 
-            // Relasi ke kontrak penyewa
+
+            // hubungan kamar
+            $table->foreignId('room_id')
+                  ->constrained('rental_rooms')
+                  ->cascadeOnDelete();
+
+
+
+            // hubungan kontrak
             $table->foreignId('contract_id')
+                  ->nullable()
                   ->constrained('tenant_contracts')
                   ->cascadeOnDelete();
 
-            // Rating kamar (1 - 5)
+
+
+            // nilai rating
             $table->unsignedTinyInteger('rating');
 
-            // Komentar penyewa
+
+            // komentar
             $table->text('comment')->nullable();
 
-            // Tanggal rating dibuat
-            $table->timestamp('rated_at')->useCurrent();
+
+
+            $table->timestamp('rated_at')
+                  ->useCurrent();
+
 
             $table->timestamps();
+
         });
+
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
+
     public function down(): void
     {
         Schema::dropIfExists('room_ratings');
     }
+
 };
