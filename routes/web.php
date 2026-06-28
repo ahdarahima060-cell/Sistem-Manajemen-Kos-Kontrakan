@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -135,3 +137,12 @@ Route::patch('/profil', function (Request $request) {
 Route::get('/profil-admin', function () {
     return view('profile.admin');
 })->name('profil.admin');
+
+Route::get('/notifikasi',
+[NotificationController::class,'index'])
+->name('notifikasi');
+
+Route::get(
+'/cek-reminder',
+[ReminderController::class,'check']
+);
