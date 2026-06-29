@@ -398,34 +398,6 @@
 
                     </li>
 
-
-
-
-
-
-
-                    <li class="nav-item">
-
-
-                        <a class="nav-link"
-                            href="/pembayaran">
-
-
-                            <i class="fas fa-credit-card"></i>
-
-                            Status Pembayaran
-
-
-                        </a>
-
-
-                    </li>
-
-
-
-
-
-
                     <li class="nav-item">
 
 
@@ -521,22 +493,6 @@
                     @if(Auth::check() && Auth::user()->role=='admin')
 
 
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                            href="/penyewa">
-
-
-                            <i class="fas fa-users"></i>
-
-                            Penyewa & Kontrak
-
-
-                        </a>
-
-                    </li>
 
 
 
