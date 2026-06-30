@@ -4,24 +4,28 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title') - Sistem Manajemen Kos Thursina</title>
+
+    <title>
+        @yield('title') - Sistem Manajemen Kos Thursina
+    </title>
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
     <style>
         :root {
 
-            --primary: #e279b5;
-            --secondary: #858796;
-            --light: #f8f9fc;
+            --pink: #e279b5;
             --dark: #b84d8a;
+            --bg: #f8f9fc;
 
         }
 
@@ -29,20 +33,33 @@
 
         body {
 
-            background: var(--light);
+            margin: 0;
+            background: var(--bg);
             font-family: 'Segoe UI', sans-serif;
-            overflow-x: hidden;
 
         }
 
 
 
+        /* NAVBAR */
+
         .navbar {
 
+            height: 70px;
+
             background: white;
-            box-shadow: 0 0.15rem 1.75rem rgba(58, 59, 69, .15);
-            z-index: 1030;
-            min-height: 68px;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            z-index: 1000;
+
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
 
         }
 
@@ -50,133 +67,11 @@
 
         .navbar-brand {
 
+            color: var(--pink) !important;
+
             font-weight: bold;
-            color: var(--primary) !important;
-            font-size: 1.25rem;
 
-        }
-
-
-
-        .sidebar {
-
-            position: fixed;
-
-            top: 56px;
-
-            bottom: 0;
-
-            left: -250px;
-
-            width: 250px;
-
-            background: linear-gradient(180deg,
-                    var(--primary),
-                    var(--dark));
-
-            color: white;
-
-            padding: 20px 0;
-
-            transition: .3s;
-
-            z-index: 1020;
-
-        }
-
-
-
-        .sidebar.show {
-
-            left: 0;
-
-        }
-
-
-
-        .main-content {
-
-            padding: 20px;
-
-            width: 100%;
-
-            transition: .3s;
-
-        }
-
-
-
-        @media(min-width:992px) {
-
-            body.sidebar-open .main-content {
-
-                margin-left: 250px;
-
-                width: calc(100% - 250px);
-
-            }
-
-        }
-
-
-
-        .sidebar-overlay {
-
-            position: fixed;
-
-            top: 56px;
-
-            left: 0;
-
-            right: 0;
-
-            bottom: 0;
-
-            background: rgba(0, 0, 0, .4);
-
-            display: none;
-
-            z-index: 1010;
-
-        }
-
-
-
-        .sidebar-overlay.show {
-
-            display: block;
-
-        }
-
-
-
-        .sidebar .nav-link {
-
-            color: white;
-
-            padding: 12px 20px;
-
-            display: block;
-
-            text-decoration: none;
-
-        }
-
-
-
-        .sidebar .nav-link:hover {
-
-            background: rgba(255, 255, 255, .15);
-
-        }
-
-
-
-        .sidebar .nav-link i {
-
-            width: 20px;
-
-            margin-right: 10px;
+            font-size: 22px;
 
         }
 
@@ -188,27 +83,195 @@
 
             background: none;
 
-            color: var(--primary);
+            font-size: 25px;
 
-            font-size: 22px;
+            color: var(--pink);
 
         }
 
 
 
+
+
+        /* SIDEBAR */
+
+
+        .sidebar {
+
+
+            position: fixed;
+
+            top: 70px;
+
+            left: 0;
+
+            bottom: 0;
+
+            width: 260px;
+
+            background: linear-gradient(180deg,
+                    var(--pink),
+                    var(--dark));
+
+
+            padding-top: 20px;
+
+            transition: .3s;
+
+            z-index: 999;
+
+
+        }
+
+
+
+        .sidebar.hide {
+
+            left: -260px;
+
+        }
+
+
+
+
+        .sidebar a {
+
+
+            display: block;
+
+            padding: 14px 25px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+
+        }
+
+
+
+        .sidebar a:hover {
+
+
+            background: rgba(255, 255, 255, .2);
+
+
+        }
+
+
+
+        .sidebar i {
+
+
+            width: 25px;
+
+        }
+
+
+
+
+
+        /* CONTENT */
+
+
+        .main-content {
+
+
+            margin-left: 260px;
+
+            padding: 100px 40px 40px;
+
+            min-height: calc(100vh - 70px);
+
+            transition: .3s;
+
+
+        }
+
+
+
+        .main-content.full {
+
+
+            margin-left: 0;
+
+
+        }
+
+
+
+
+        /* FOOTER */
+
+
         footer {
+
+
+            margin-left: 260px;
+
+            padding: 25px;
 
             background: white;
 
-            border-top: 1px solid #ddd;
-
-            padding: 40px;
-
-            margin-top: 200px;
-
             text-align: center;
 
-            color: var(--secondary);
+            color: #777;
+
+            transition: .3s;
+
+
+        }
+
+
+
+        footer.full {
+
+
+            margin-left: 0;
+
+
+        }
+
+
+
+
+        /* MOBILE */
+
+
+        @media(max-width:992px) {
+
+
+            .sidebar {
+
+                left: -260px;
+
+            }
+
+
+            .sidebar.show {
+
+                left: 0;
+
+            }
+
+
+            .main-content {
+
+                margin-left: 0;
+
+                padding: 90px 15px;
+
+            }
+
+
+            footer {
+
+                margin-left: 0;
+
+            }
+
 
         }
     </style>
@@ -222,73 +285,77 @@
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <!-- NAVBAR -->
+
+
+    <nav class="navbar">
 
 
         <div class="container-fluid">
 
 
-            <button class="sidebar-toggle me-2"
-                onclick="toggleSidebar()">
 
-                <i class="fas fa-bars"></i>
+            <button class="sidebar-toggle"
+                onclick="toggleMenu()">
+
+
+                <i class="fa fa-bars"></i>
+
 
             </button>
 
 
 
-            <a class="navbar-brand" href="/">
 
-                <i class="fas fa-building"></i>
+            <a class="navbar-brand">
+
+
+                <i class="fa fa-building"></i>
 
                 Manajemen Kos Thursina
+
 
             </a>
 
 
 
-            <ul class="navbar-nav ms-auto">
 
-
-                <li class="nav-item dropdown">
-
-
-                    <a class="nav-link dropdown-toggle"
-                        href="#"
-                        data-bs-toggle="dropdown">
-
-
-                        <i class="fas fa-user-circle"></i>
-
-                        Profil
-
-
-                    </a>
+            <div class="d-flex align-items-center gap-3">
 
 
 
-                    <ul class="dropdown-menu">
+                <a href="{{ Auth::user()->role=='admin'
+? route('profil.admin')
+: route('profil') }}"
+                    class="text-dark text-decoration-none">
 
 
-                        <li>
+                    <i class="fa fa-user-circle"></i>
 
-                            <a class="dropdown-item"
-                                href="{{route('logout')}}">
-
-                                Logout
-
-                            </a>
-
-                        </li>
+                    Profil
 
 
-                    </ul>
+                </a>
 
 
-                </li>
 
 
-            </ul>
+
+                <a href="{{route('logout')}}"
+                    class="btn btn-danger btn-sm">
+
+
+                    <i class="fa fa-right-from-bracket"></i>
+
+                    Logout
+
+
+                </a>
+
+
+
+            </div>
+
 
 
 
@@ -302,269 +369,135 @@
 
 
 
-    <div id="sidebarOverlay"
-        class="sidebar-overlay"
-        onclick="toggleSidebar()">
-
-    </div>
+    <!-- SIDEBAR -->
 
 
+    <div id="sidebar"
+        class="sidebar">
 
 
 
-    <div class="container-fluid">
-
-
-        <div class="row">
-
-
-
-            <nav id="sidebarMenu"
-                class="sidebar">
-
-
-
-                <ul class="nav flex-column">
-
-
-
-
-
-                    <li class="nav-item">
-
-
-                        <a class="nav-link"
-
-                            href="{{ Auth::user()->role=='admin'
+        <a href="{{ Auth::user()->role=='admin'
 ? route('profil.admin')
 : route('profil') }}">
 
 
-                            <i class="fa-solid fa-circle-user"></i>
+            <i class="fa fa-user"></i>
 
-                            Profil
-
-
-                        </a>
+            Profil
 
 
-                    </li>
+        </a>
 
 
 
 
 
 
-                    <li class="nav-item">
-
-
-                        <a class="nav-link"
-
-                            href="{{ Auth::user()->role=='admin'
+        <a href="{{ Auth::user()->role=='admin'
 ? route('dashboard.admin')
 : route('dashboard.user') }}">
 
 
+            <i class="fa fa-dashboard"></i>
 
-                            <i class="fas fa-dashboard"></i>
+            Dashboard
 
-                            Dashboard
 
+        </a>
 
-                        </a>
 
 
-                    </li>
 
 
 
 
+        <a href="/kamar">
 
 
-                    <li class="nav-item">
+            <i class="fa fa-door-open"></i>
 
+            Kamar
 
-                        <a class="nav-link"
-                            href="/kamar">
 
+        </a>
 
-                            <i class="fas fa-door-open"></i>
 
-                            Kamar
 
 
-                        </a>
 
 
-                    </li>
 
-                    <li class="nav-item">
+        <a href="/penyewa">
 
 
-                        <a class="nav-link"
-                            href="/kontrak">
+            <i class="fa fa-file-contract"></i>
 
+            Data Sewa
 
-                            <i class="fas fa-file-contract"></i>
 
-                            Kontrak Sewa
+        </a>
 
 
-                        </a>
 
 
-                    </li>
 
 
 
 
+        <a href="/notifikasi">
 
 
-                    <!-- NOTIFIKASI FIX -->
+            <i class="fa fa-bell"></i>
 
+            Notifikasi
 
-                    <li class="nav-item">
 
+        </a>
 
-                        <a class="nav-link"
-                            href="/notifikasi">
 
 
-                            <i class="fas fa-bell"></i>
 
-                            Notifikasi
 
 
 
-                            @php
+        @if(Auth::user()->role=='admin')
 
 
-                            $jumlahNotif = 0;
 
+        <a href="/pembayaran">
 
 
-                            if(Auth::check()){
+            <i class="fa fa-money-bill"></i>
 
+            Pembayaran
 
-                            $jumlahNotif = \App\Models\Reminder::where('status','pending')
-                            ->whereHas('contract')
-                            ->count();
 
+        </a>
 
 
-                            }
 
 
 
-                            @endphp
 
+        <a href="/laporan">
 
 
+            <i class="fa fa-chart-bar"></i>
 
+            Laporan
 
-                            @if($jumlahNotif > 0)
 
+        </a>
 
-                            <span class="badge bg-danger ms-2">
 
-                                {{$jumlahNotif}}
 
-                            </span>
+        @endif
 
 
-                            @endif
 
 
 
-
-                        </a>
-
-
-                    </li>
-
-
-
-
-
-
-
-
-
-                    @if(Auth::check() && Auth::user()->role=='admin')
-
-
-
-
-
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                            href="/pembayaran">
-
-
-                            <i class="fas fa-money-bill-wave"></i>
-
-                            Pembayaran
-
-
-                        </a>
-
-                    </li>
-
-
-
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                            href="/laporan">
-
-
-                            <i class="fas fa-chart-bar"></i>
-
-                            Laporan
-
-
-                        </a>
-
-                    </li>
-
-
-
-
-                    @endif
-
-
-
-
-
-                </ul>
-
-
-
-            </nav>
-
-
-
-
-
-
-
-            <main class="main-content">
-
-
-                @yield('content')
-
-
-            </main>
-
-
-
-
-        </div>
 
     </div>
 
@@ -574,17 +507,37 @@
 
 
 
-    <footer>
 
 
-        <p>
+    <!-- ISI HALAMAN -->
 
-            © 2026 Sistem Manajemen Kos Kontrakan.
 
-        </p>
+    <div id="content"
+        class="main-content">
+
+
+        @yield('content')
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <footer id="footer">
+
+
+        © 2026 Sistem Manajemen Kos Kontrakan
 
 
     </footer>
+
+
 
 
 
@@ -598,21 +551,27 @@
 
 
     <script>
-        function toggleSidebar() {
+        function toggleMenu() {
 
 
-            let sidebar = document.getElementById('sidebarMenu');
-
-            let overlay = document.getElementById('sidebarOverlay');
-
+            let sidebar =
+                document.getElementById('sidebar');
 
 
-            sidebar.classList.toggle('show');
+            let content =
+                document.getElementById('content');
 
-            overlay.classList.toggle('show');
 
-            document.body.classList.toggle('sidebar-open');
+            let footer =
+                document.getElementById('footer');
 
+
+
+            sidebar.classList.toggle('hide');
+
+            content.classList.toggle('full');
+
+            footer.classList.toggle('full');
 
 
         }
@@ -623,7 +582,7 @@
     @yield('scripts')
 
 
-</body>
 
+</body>
 
 </html>

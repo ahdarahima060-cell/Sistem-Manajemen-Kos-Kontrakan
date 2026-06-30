@@ -1,27 +1,89 @@
 @extends('layouts.app')
 
+
+@section('title','Profil Admin')
+
+
 @section('content')
 
-<div class="container-fluid">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h2>Profil Admin</h2>
-            <p class="text-muted">Kelola data akun dan informasi profil Anda.</p>
+
+<div class="container">
+
+
+    <div class="card shadow p-4">
+
+
+        <h2 class="fw-bold mb-4">
+
+            <i class="fa fa-user-circle"></i>
+
+            Profil Admin
+
+        </h2>
+
+
+
+        <div class="mb-3">
+
+            <label class="fw-bold">
+                Nama
+            </label>
+
+            <p>
+                {{ Auth::user()->name }}
+            </p>
+
         </div>
+
+
+
+        <div class="mb-3">
+
+            <label class="fw-bold">
+                Email
+            </label>
+
+            <p>
+                {{ Auth::user()->email }}
+            </p>
+
+        </div>
+
+
+
+        <div class="mb-3">
+
+            <label class="fw-bold">
+                Role
+            </label>
+
+            <p>
+
+                <span class="badge bg-danger">
+
+                    {{ Auth::user()->role }}
+
+                </span>
+
+            </p>
+
+        </div>
+
+
+
+
+        <a href="/profil/edit"
+            class="btn btn-primary">
+
+            Edit Profil
+
+        </a>
+
+
     </div>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h5>Nama</h5>
-            <p>{{ Auth::user()->name }}</p>
 
-            <h5>Email</h5>
-            <p>{{ Auth::user()->email }}</p>
-
-            <h5>Peran</h5>
-            <p>{{ ucfirst(Auth::user()->role) }}</p>
-        </div>
-    </div>
 </div>
+
 
 @endsection

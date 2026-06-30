@@ -57,7 +57,7 @@
         <!-- KAMAR -->
         <div class="col-lg-3 col-md-6">
 
-            <a href="{{ route('kamar') }}" 
+            <a href="{{ route('kamar.index') }}"
                style="text-decoration:none;color:inherit;">
 
                 <div class="card shadow-sm h-100 border-0">
