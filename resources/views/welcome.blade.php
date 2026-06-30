@@ -1,94 +1,965 @@
 ﻿<!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Kos Thursina</title>
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+
         body {
-            min-height: 100vh;
-            background: #000;
-            color: #fff;
+
+            font-family: 'Segoe UI', sans-serif;
+
+            background: #fff5fb;
+
+            color: #333;
+
         }
-        .hero {
-            min-height: 100vh;
-            background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.65)), url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
+
+
+
+
+        /* NAVBAR */
+
+        .navbar {
+
+            position: absolute;
+
+            top: 0;
+
+            width: 100%;
+
+            z-index: 99;
+
+            padding: 25px 60px;
+
         }
-        .hero .btn-pill {
+
+
+        .logo {
+
+            color: white;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+        }
+
+
+
+        .logo span {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 400;
+
+        }
+
+
+
+
+
+        .menu {
+
+
+            background: rgba(255, 255, 255, .18);
+
+            backdrop-filter: blur(15px);
+
+            padding: 15px 35px;
+
             border-radius: 50px;
+
+
         }
-        .navbar-nav .nav-link {
-            color: rgba(255,255,255,.85) !important;
+
+
+
+        .menu a {
+
+
+            color: white;
+
+            text-decoration: none;
+
+            margin: 0 15px;
+
+            font-weight: 600;
+
+
         }
-        .navbar-brand {
-            color: #ec4899 !important;
-            letter-spacing: .05em;
+
+
+
+        .menu a:hover {
+
+            color: #ff69b4;
+
         }
-        .text-pink {
-            color: #ec4899 !important;
+
+
+
+
+
+        .btn-login {
+
+
+            border: 1px solid white;
+
+            color: white;
+
+            padding: 10px 25px;
+
+            border-radius: 20px;
+
+
         }
-        .btn-pink {
-            background: #ec4899;
-            border-color: #ec4899;
-            color: #fff;
+
+
+
+        .btn-register {
+
+
+            background: #e279b5;
+
+            color: white;
+
+            padding: 10px 25px;
+
+            border-radius: 20px;
+
+            margin-left: 10px;
+
+
         }
-        .btn-pink:hover {
-            background: #db2777;
-            border-color: #db2777;
-            color: #fff;
+
+
+
+
+
+
+
+
+        /* HERO */
+
+
+        .hero {
+
+
+            height: 100vh;
+
+
+            background:
+
+
+                linear-gradient(rgba(0, 0, 0, .55),
+                    rgba(0, 0, 0, .55)),
+
+
+                url("https://images.unsplash.com/photo-1560185008-b033106af5c3");
+
+
+            background-size: cover;
+
+            background-position: center;
+
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+
+            color: white;
+
+
         }
-        .section-light {
-            background: #f8f9fa;
-            color: #212529;
+
+
+
+
+        .hero h1 {
+
+            font-size: 75px;
+
+            font-weight: 900;
+
+        }
+
+
+
+        .hero p {
+
+            font-size: 22px;
+
+        }
+
+
+        /* FEATURE */
+
+
+        .feature {
+
+
+            margin-top: -70px;
+
+
+        }
+
+
+        .card-box {
+
+
+            background: rgba(255, 255, 255, .75);
+
+            backdrop-filter: blur(10px);
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            height: 200px;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+
+
+        }
+
+
+
+        .icon {
+
+            font-size: 40px;
+
+            color: #e279b5;
+
+
+        }
+
+
+
+
+
+
+
+        section {
+
+
+            padding: 100px 0;
+
+
+        }
+
+
+
+        .title {
+
+
+            font-size: 40px;
+
+            font-weight: 800;
+
+            text-align: center;
+
+            color: #b84d8a;
+
+
+        }
+
+
+
+
+
+
+
+        /* CARD KAMAR */
+
+
+        .room-card {
+
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            border: none;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+
+
+        }
+
+
+
+
+        .room-card img {
+
+
+            height: 250px;
+
+            object-fit: cover;
+
+
+        }
+
+
+
+
+
+
+
+
+
+        /* KONTAK */
+
+
+        .contact-card {
+
+
+            background: #e279b5;
+
+            color: white;
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+
+        }
+
+
+
+
+
+        footer {
+
+
+            background: #b84d8a;
+
+            color: white;
+
+            padding: 30px;
+
+
         }
     </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(0,0,0,.7);">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Kos Thursina</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                </ul>
-                <div class="d-flex gap-2 align-items-center">
-                    <a href="{{ url('/login') }}" class="btn btn-outline-light">Login</a>
-                    <a href="{{ url('/register') }}" class="btn btn-pink fw-semibold">Buat Akun</a>
-                </div>
+
+</head>
+
+
+
+
+<body>
+
+
+
+    <nav class="navbar">
+
+
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+
+
+            <div class="logo">
+
+
+                <i class="fa-solid fa-building"></i>
+                Kos Thursina
+
+
+                <span>
+
+                    Nyaman, Aman, Terjangkau
+
+                </span>
+
+
             </div>
+
+
+
+
+            <div class="menu">
+
+
+                <a href="#home">
+                    Beranda
+                </a>
+
+
+                <a href="#kamar">
+                    Kamar
+                </a>
+
+
+                <a href="#fasilitas">
+                    Fasilitas
+                </a>
+
+
+                <a href="#kontak">
+                    Kontak
+                </a>
+
+
+            </div>
+
+
+
+
+
+            <div>
+
+
+                <a href="/login" class="btn-login">
+
+                    Login
+
+                </a>
+
+
+
+                <a href="/register" class="btn-register">
+
+                    Buat Akun
+
+                </a>
+
+
+
+            </div>
+
+
         </div>
+
+
     </nav>
 
-    <section class="hero">
-        <div class="container text-center py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <p class="text-uppercase text-pink fw-semibold mb-3">Selamat Datang Di</p>
-                    <h1 class="display-4 fw-bold mb-4">Website Kos Thursina</h1>
-                    <p class="lead mb-4">Ayo sewa kamar pada kos kami, dijamin nyaman, aman dan harga  terjangkau.</p>
-                </div>
-            </div>
-        </div>
+
+
+
+
+
+
+    <section class="hero" id="home">
+
+
+        <div>
+
+
+            <h5>
+                SELAMAT DATANG DI
+            </h5>
+
+
+            <h1>
+                Kos Thursina
+            </h1>
+
+
+            <p>
+
+                Hunian nyaman dengan fasilitas lengkap
+                <br>
+                dan harga terjangkau.
+
+            </p>
+
+
     </section>
 
 
 
 
 
-    <footer class="py-4 text-center text-white" style="background: rgba(0,0,0,.85);">
-        <div class="container">
-            <small>© {{ date('Y') }} Kos Thursina</small>
+
+
+
+    <section class="container feature">
+
+
+        <div class="row g-4">
+
+
+
+            <div class="col-md-3">
+
+                <div class="card-box text-center">
+
+                    <div class="icon">
+                        <i class="fa fa-bed"></i>
+                    </div>
+
+
+                    <h5>
+                        Kamar Nyaman
+                    </h5>
+
+                    <p>
+                        Bersih dan nyaman
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="col-md-3">
+
+                <div class="card-box text-center">
+
+                    <div class="icon">
+                        <i class="fa fa-wifi"></i>
+                    </div>
+
+
+                    <h5>
+                        Wifi Cepat
+                    </h5>
+
+                    <p>
+                        Internet stabil
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="col-md-3">
+
+                <div class="card-box text-center">
+
+                    <div class="icon">
+                        <i class="fa fa-shield"></i>
+                    </div>
+
+
+                    <h5>
+                        Aman
+                    </h5>
+
+                    <p>
+                        Keamanan 24 jam
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="col-md-3">
+
+                <div class="card-box text-center">
+
+                    <div class="icon">
+                        <i class="fa fa-tags"></i>
+                    </div>
+
+
+                    <h5>
+                        Harga Murah
+                    </h5>
+
+                    <p>
+                        Sesuai fasilitas
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+
+
         </div>
+
+
+    </section>
+
+
+
+
+
+
+
+
+    <section id="kamar">
+
+
+        <div class="container">
+
+
+            <h2 class="title">
+                Pilihan Kamar
+            </h2>
+
+
+            <div class="row mt-5 g-4">
+
+
+
+                <div class="col-md-4">
+
+
+                    <div class="card room-card">
+
+
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace">
+
+
+                        <div class="card-body">
+
+                            <h4>
+                                Standard
+                            </h4>
+
+
+                            <p>
+                                Kamar nyaman untuk kebutuhan sehari-hari.
+                            </p>
+
+                            <h5>
+                                Rp700.000/bulan
+                            </h5>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+                <div class="col-md-4">
+
+
+                    <div class="card room-card">
+
+
+                        <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed">
+
+
+                        <div class="card-body">
+
+
+                            <h4>
+                                AC Room
+                            </h4>
+
+
+                            <p>
+                                Kamar dingin dan nyaman.
+                            </p>
+
+
+                            <h5>
+                                Rp1.000.000/bulan
+                            </h5>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+                <div class="col-md-4">
+
+
+                    <div class="card room-card">
+
+
+                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+
+
+                        <div class="card-body">
+
+                            <h4>
+                                Premium
+                            </h4>
+
+
+                            <p>
+                                Fasilitas lengkap.
+                            </p>
+
+
+                            <h5>
+                                Rp1.500.000/bulan
+                            </h5>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+    <section id="fasilitas">
+
+
+        <div class="container">
+
+
+            <h2 class="title">
+                Fasilitas
+            </h2>
+
+
+
+            <div class="row text-center mt-5">
+
+
+                <div class="col">
+
+                    <i class="fa fa-wifi fa-3x text-danger"></i>
+
+                    <h5>
+                        Wifi
+                    </h5>
+
+                </div>
+
+
+
+                <div class="col">
+
+                    <i class="fa fa-car fa-3x text-danger"></i>
+
+                    <h5>
+                        Parkir
+                    </h5>
+
+                </div>
+
+
+
+                <div class="col">
+
+                    <i class="fa fa-lock fa-3x text-danger"></i>
+
+                    <h5>
+                        Keamanan
+                    </h5>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <div class="container">
+
+
+
+    </div>
+
+
+    </section>
+
+
+
+
+
+
+    <section id="kontak">
+
+
+        <div class="container">
+
+
+            <h2 class="title">
+                Kontak
+            </h2>
+
+
+            <div class="row mt-5">
+
+
+                <div class="col-md-4">
+
+
+                    <div class="contact-card text-center">
+
+
+                        <i class="fa fa-phone fa-2x"></i>
+
+                        <h5>
+                            Telepon
+                        </h5>
+
+
+                        <p>
+                            0812-3456-7890
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                <div class="col-md-4">
+
+
+                    <div class="contact-card text-center">
+
+
+                        <i class="fa fa-envelope fa-2x"></i>
+
+                        <h5>
+                            Email
+                        </h5>
+
+
+                        <p>
+                            kosthursina@gmail.com
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+                <div class="col-md-4">
+
+
+                    <div class="contact-card text-center">
+
+
+                        <i class="fa fa-location-dot fa-2x"></i>
+
+                        <h5>
+                            Alamat
+                        </h5>
+
+
+                        <p>
+                            Jl. Kos Thursina
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+    <footer class="text-center">
+
+        © 2026 Kos Thursina
+
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 </body>
+
 </html>

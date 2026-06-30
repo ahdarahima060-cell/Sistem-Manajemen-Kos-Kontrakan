@@ -8,7 +8,7 @@
 
     <div class="row gy-4 mb-4">
 
-        <!-- HEADER -->
+        //header
         <div class="col-12">
             <div class="card border-0 shadow-sm overflow-hidden">
 
@@ -54,7 +54,7 @@
 
 
 
-        <!-- KAMAR -->
+        //kamar
         <div class="col-lg-3 col-md-6">
 
             <a href="{{ route('kamar.index') }}"
@@ -105,9 +105,7 @@
         </div>
 
 
-
-
-        <!-- PEMBAYARAN -->
+        //pembayaran
         <div class="col-lg-3 col-md-6">
 
 
@@ -172,10 +170,7 @@
         </div>
 
 
-
-
-
-        <!-- KONTRAK -->
+        //kontrak
         <div class="col-lg-3 col-md-6">
 
 
@@ -242,11 +237,7 @@
         </div>
 
 
-
-
-
-
-        <!-- PROFIL -->
+        //profil
         <div class="col-lg-3 col-md-6">
 
 
@@ -294,7 +285,6 @@
                         </div>
 
 
-
                         <p class="text-secondary small">
 
                             Perbarui data kontak dan informasi akun Anda kapan saja.
@@ -319,6 +309,5 @@
 
 
 </div>
-
 
 @endsection

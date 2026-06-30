@@ -68,7 +68,7 @@
 
             <div class="mb-4">
                 <label class="form-label text-secondary small fw-semibold">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                <input type="password" name="password" class="form-control" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required>
             </div>
 
             <div class="d-grid gap-2 mb-2">

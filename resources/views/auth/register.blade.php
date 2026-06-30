@@ -1,215 +1,162 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Akun - Kos Thursina</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Register - Kos Thursina</title>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(
-                135deg,
-                #e9b5bd 0%,
-                #c5bfd1 50%,
-                #8eb9df 100%
-            );
+            background:
+                linear-gradient(rgba(255, 220, 240, .8),
+                    rgba(220, 225, 255, .8)),
+                url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea');
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI';
         }
-
-        .form-card {
-            background: #ffffff;
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            padding: 35px;
+        .card-register {
+            width: 430px;
+            background: rgba(255, 255, 255, .88);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px #0002;
         }
-
-        .logo-icon {
-            font-size: 50px;
-            color: #e56fa0;
+        .logo {
+            text-align: center;
         }
-
-        .form-title {
-            color: #e56fa0;
-            font-weight: 700;
+        .logo i {
+            font-size: 55px;
+            color: #dc5a9b;
         }
-
-        .subtitle {
-            color: #6c757d;
-            font-size: 15px;
+        .logo h2 {
+            color: #dc5a9b;
+            font-weight: 800;
         }
-
-        .form-label {
-            color: #555;
-            font-weight: 600;
+        .input {
+            position: relative;
         }
-
+        .input i {
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            color: #777;
+        }
         .form-control {
-            border-radius: 10px;
-            border: 1px solid #d9dee8;
-            padding: 12px;
-            background: #fff;
+            height: 52px;
+            padding-left: 45px;
+            border-radius: 12px;
         }
-
-        .form-control:focus {
-            border-color: #e56fa0;
-            box-shadow: 0 0 0 0.2rem rgba(229,111,160,.25);
-        }
-
-        .btn-pink {
-            background: #e56fa0;
-            border: none;
+        .btn-main {
+            background: #dc5a9b;
             color: white;
-            font-weight: 600;
-            padding: 10px 25px;
-            border-radius: 10px;
+            height: 52px;
+            border-radius: 12px;
+            font-weight: bold;
+            border: 0;
+        }
+        a {
+            color: #dc5a9b;
+            font-weight: bold;
+            text-decoration: none;
         }
 
-        .btn-pink:hover {
-            background: #d94c8d;
-            color: white;
-        }
-
-        .btn-login {
-            background: white;
-            border: 1px solid #d9dee8;
-            color: #555;
-            font-weight: 600;
-            padding: 10px 25px;
-            border-radius: 10px;
-        }
-
-        .btn-login:hover {
-            background: #f5f5f5;
-        }
     </style>
 </head>
-
 <body>
 
-<div class="container">
-    <div class="row justify-content-center">
+    <div class="card-register">
+        <div class="logo">
+            <i class="fa-solid fa-building"></i>
+            <h2>
+                Manajemen Kos
+            </h2>
+            <p>
+                Sistem Manajemen Kos Kontrakan
+            </p>
+        </div>
+        <h3 class="text-center fw-bold">
+            Buat Akun Baru
+        </h3>
+        <p class="text-center text-muted">
+            Isi data berikut untuk membuat akun baru
+        </p>
+        <form method="POST" action="{{route('register')}}">
+            @csrf
 
-        <div class="col-md-7 col-lg-6">
-
-            <div class="card form-card">
-
-                <div class="text-center mb-4">
-                    <div class="logo-icon">
-                        🏠
-                    </div>
-
-                    <h1 class="form-title mt-2">
-                        Daftar Akun
-                    </h1>
-
-                    <p class="subtitle">
-                        Sistem Manajemen Kos Kontrakan
-                    </p>
-                </div>
-
-                <form action="{{ route('register.store') }}" method="POST">
-                    @csrf
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Nama Lengkap
-                        </label>
-
-                        <input type="text"
-                               name="name"
-                               class="form-control @error('name') is-invalid @enderror"
-                               placeholder="Masukkan nama lengkap"
-                               value="{{ old('name') }}"
-                               required>
-                        @error('name')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Email
-                        </label>
-
-                        <input type="email"
-                               name="email"
-                               class="form-control @error('email') is-invalid @enderror"
-                               placeholder="Masukkan email"
-                               value="{{ old('email') }}"
-                               required>
-                        @error('email')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Password
-                        </label>
-
-                        <input type="password"
-                               name="password"
-                               class="form-control @error('password') is-invalid @enderror"
-                               placeholder="Masukkan password"
-                               required>
-                        @error('password')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label">
-                            Konfirmasi Password
-                        </label>
-
-                        <input type="password"
-                               name="password_confirmation"
-                               class="form-control"
-                               placeholder="Konfirmasi password"
-                               required>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <a href="{{ url('/login') }}"
-                           class="btn btn-login">
-                            Login
-                        </a>
-
-                        <button type="submit"
-                                class="btn btn-pink">
-                            Buat Akun
-                        </button>
-
-                    </div>
-
-                </form>
-
+            <label>
+                Nama Lengkap
+            </label>
+            <div class="input mb-3">
+                <i class="fa fa-user"></i>
+                <input
+                    name="name"
+                    class="form-control"
+                    placeholder="Masukkan nama lengkap">
+            </div>
+            <label>Email</label>
+            <div class="input mb-3">
+                <i class="fa fa-envelope"></i>
+                <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    placeholder="Masukkan email Anda">
+            </div>
+            <label>Password</label>
+            <div class="input mb-3">
+                <i class="fa fa-lock"></i>
+                <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Masukkan password">
+            </div>
+            <label>
+                Konfirmasi Password
+            </label>
+            <div class="input mb-3">
+                <i class="fa fa-lock"></i>
+                <input
+                    name="password_confirmation"
+                    type="password"
+                    class="form-control"
+                    placeholder="Konfirmasi password">
             </div>
 
-        </div>
+            <div class="mb-3">
+                <input type="checkbox">
 
+                Saya menyetujui
+
+                <a href="#">
+                    Syarat & Ketentuan
+                </a>
+            </div>
+            <button class="btn-main w-100">
+                <i class="fa fa-user-plus"></i>
+                Buat Akun
+            </button>
+        </form>
+        <p class="text-center mt-4">
+            Sudah punya akun?
+            <a href="{{route('login')}}">
+                Masuk di sini
+            </a>
+        </p>
     </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

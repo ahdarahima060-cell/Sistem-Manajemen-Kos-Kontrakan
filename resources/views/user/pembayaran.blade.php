@@ -6,54 +6,54 @@
 
 <div class="container mt-4">
 
-<div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0">
 
-<div class="card-body">
-
-
-<h3 class="fw-bold">
-    Status Pembayaran
-</h3>
-
-<hr>
+        <div class="card-body">
 
 
-@if(isset($pembayaran) && $pembayaran)
+            <h3 class="fw-bold">
+                Status Pembayaran
+            </h3>
+
+            <hr>
 
 
-    @if($pembayaran->status == 'lunas')
+            @if(isset($pembayaran) && $pembayaran)
 
-        <div class="alert alert-success">
-            Pembayaran Lunas
+
+            @if($pembayaran->status == 'lunas')
+
+            <div class="alert alert-success">
+                Pembayaran Lunas
+            </div>
+
+            @else
+
+            <div class="alert alert-warning">
+                Belum Lunas
+            </div>
+
+            @endif
+
+
+
+            @else
+
+
+            <div class="alert alert-danger">
+
+                Belum ada data pembayaran.
+
+            </div>
+
+
+            @endif
+
+
+
         </div>
 
-    @else
-
-        <div class="alert alert-warning">
-            Belum Lunas
-        </div>
-
-    @endif
-
-
-
-@else
-
-
-<div class="alert alert-danger">
-
-    Belum ada data pembayaran.
-
-</div>
-
-
-@endif
-
-
-
-</div>
-
-</div>
+    </div>
 
 </div>
 

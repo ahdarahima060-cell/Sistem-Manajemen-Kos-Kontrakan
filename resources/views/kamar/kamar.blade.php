@@ -114,9 +114,6 @@
 
                 </thead>
 
-
-
-
                 <tbody>
 
 
@@ -129,9 +126,6 @@
                         <td>
                             {{$index+1}}
                         </td>
-
-
-
 
                         <td>
 
@@ -156,22 +150,14 @@
                         </td>
 
 
-
-
-
                         <td>
                             {{$room->room_code}}
                         </td>
 
 
-
-
                         <td>
                             {{$room->type}}
                         </td>
-
-
-
 
                         <td>
 
@@ -206,18 +192,11 @@
                         </td>
 
 
-
-
-
                         <td>
 
                             Rp {{number_format($room->monthly_price,0,',','.')}}
 
                         </td>
-
-
-
-
 
                         <td>
 
@@ -228,9 +207,6 @@
                                 Detail
 
                             </a>
-
-
-
 
                             @if(Auth::user()->role=='admin')
 
@@ -280,16 +256,7 @@
     </div>
 
 
-
-
-
-
-
-
-
     @if(Auth::user()->role=='admin')
-
-
 
     <div class="modal fade"
         id="addRoomModal">
@@ -312,8 +279,6 @@
 
                     </h5>
 
-
-
                     <button class="btn-close"
                         data-bs-dismiss="modal">
 
@@ -321,10 +286,6 @@
 
 
                 </div>
-
-
-
-
 
                 <form action="{{route('kamar.store')}}"
                     method="POST"
@@ -337,7 +298,6 @@
                     <div class="modal-body">
 
 
-
                         <label>Kode Kamar</label>
 
                         <input type="text"
@@ -345,10 +305,6 @@
                             class="form-control mb-3"
                             placeholder="Contoh : Thursina 3"
                             required>
-
-
-
-
 
                         <label>Tipe Kamar</label>
 
@@ -374,21 +330,12 @@
                         </select>
 
 
-
-
-
-
                         <label>Lantai</label>
 
                         <input type="number"
                             name="floor"
                             class="form-control mb-3"
                             value="1">
-
-
-
-
-
 
                         <label>Kapasitas Penghuni</label>
 
@@ -397,21 +344,12 @@
                             class="form-control mb-3"
                             value="1">
 
-
-
-
-
-
                         <label>Luas Kamar (m²)</label>
 
                         <input type="number"
                             name="area_m2"
                             class="form-control mb-3"
                             placeholder="Contoh 12">
-
-
-
-
 
                         <label>Fasilitas</label>
 
@@ -474,11 +412,6 @@
 
                     </div>
 
-
-
-
-
-
                     <div class="modal-footer">
 
 
@@ -518,24 +451,12 @@
 
     </div>
 
-
-
     @endif
-
-
-
-
 
 </div>
 
-
-
-
-
-
 <style>
     .btn-tambah-kamar {
-
 
         background: #0d6efd;
 
@@ -562,15 +483,11 @@
 
     }
 
-
-
-
     .btn-tambah-kamar:hover {
 
         background: #0b5ed7;
 
     }
 </style>
-
 
 @endsection

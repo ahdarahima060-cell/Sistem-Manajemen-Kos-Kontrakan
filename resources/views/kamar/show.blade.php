@@ -18,9 +18,6 @@
     </a>
 
 
-
-
-
     <div class="card shadow-sm">
 
 
@@ -81,14 +78,10 @@
                         {{$room->type}}
                     </p>
 
-
-
                     <p>
                         <b>Lantai :</b>
                         {{$room->floor}}
                     </p>
-
-
 
                     <p>
                         <b>Kapasitas :</b>
@@ -102,26 +95,16 @@
                         {{$room->area_m2}} m²
                     </p>
 
-
-
-
                     <p>
                         <b>Fasilitas :</b>
                         {{$room->facilities}}
                     </p>
-
-
-
 
                     <p>
                         <b>Harga :</b>
 
                         Rp {{number_format($room->monthly_price,0,',','.')}}
                     </p>
-
-
-
-
 
                     <p>
 
@@ -156,39 +139,22 @@
 
 
                         @endif
-
-
                     </p>
-
-
 
                 </div>
 
-
-
             </div>
-
-
-
-
 
             <hr>
 
 
-
-
-
-            {{-- RATING KAMAR --}}
-
+            //Rating kamar
 
             <h4 class="fw-bold">
 
                 ⭐ Rating Kamar
 
             </h4>
-
-
-
 
 
             @if(Auth::user()->role == 'user')
@@ -202,8 +168,6 @@
                 @csrf
 
 
-
-
                 <select name="rating"
                     class="form-control mb-3">
 
@@ -212,33 +176,23 @@
                         ⭐⭐⭐⭐⭐ Sangat Bagus
                     </option>
 
-
                     <option value="4">
                         ⭐⭐⭐⭐ Bagus
                     </option>
-
 
                     <option value="3">
                         ⭐⭐⭐ Cukup
                     </option>
 
-
                     <option value="2">
                         ⭐⭐ Kurang
                     </option>
-
 
                     <option value="1">
                         ⭐ Buruk
                     </option>
 
-
-
                 </select>
-
-
-
-
 
                 <textarea name="comment"
                     class="form-control mb-3"
@@ -246,41 +200,20 @@
 
             </textarea>
 
-
-
-
-
-
                 <button class="btn btn-primary">
 
                     Kirim Rating
 
                 </button>
 
-
-
-
             </form>
-
-
-
 
             @endif
 
-
-
-
-
-
-
         </div>
-
 
     </div>
 
-
-
 </div>
-
 
 @endsection

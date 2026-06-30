@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kos Thursina</title>
 
-    <!-- Bootstrap 5 -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -118,7 +118,7 @@
 
     </nav>
 
-    <!-- CONTENT -->
+    
     <main class="container my-5 flex-grow-1">
 
         @yield('content')
@@ -131,7 +131,7 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

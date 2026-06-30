@@ -10,20 +10,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReminderController;
+use App\Http\Controllers\SewaController;
 
-/*
-|--------------------------------------------------------------------------
-| HOME
-|--------------------------------------------------------------------------
-*/
 
 Route::view('/', 'welcome')->name('home');
-
-/*
-|--------------------------------------------------------------------------
-| REGISTER
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/register', function () {
     return view('auth.register');
@@ -48,12 +38,6 @@ Route::post('/register', function (Request $request) {
         ->with('success', 'Registrasi berhasil');
 
 })->name('register.store');
-
-/*
-|--------------------------------------------------------------------------
-| LOGIN
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -83,117 +67,57 @@ Route::post('/login', function (Request $request) {
 
 })->name('login.attempt');
 
-/*
-|--------------------------------------------------------------------------
-| LOGOUT
-|--------------------------------------------------------------------------
-*/
-
 Route::get('/logout', function (Request $request) {
 
     Auth::logout();
 
     $request->session()->invalidate();
-
     $request->session()->regenerateToken();
 
     return redirect()->route('login');
 
 })->name('logout');
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN
-|--------------------------------------------------------------------------
-*/
+Route::get('/dashboard-admin', [DashboardController::class, 'index'])
+    ->name('dashboard.admin');
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::get('/profil-admin', function () {
+    return view('profile.admin');
+})->name('profil.admin');
 
-    Route::get('/dashboard-admin', [DashboardController::class, 'index'])
-        ->name('dashboard.admin');
+// CRUD Kamar
+Route::post('/kamar', [RoomController::class, 'store'])->name('kamar.store');
+Route::get('/kamar/{id}/edit', [RoomController::class, 'edit'])->name('kamar.edit');
+Route::patch('/kamar/{id}', [RoomController::class, 'update'])->name('kamar.update');
+Route::delete('/kamar/{id}', [RoomController::class, 'destroy'])->name('kamar.destroy');
 
-    Route::get('/profil-admin', function () {
-        return view('profile.admin');
-    })->name('profil.admin');
+Route::get('/dashboard-user', function () {
+    return view('dashboard.penyewa');
+})->name('dashboard.user');
 
-    // CRUD Kamar
-    Route::post('/kamar', [RoomController::class, 'store'])
-        ->name('kamar.store');
+// Data Kamar
+Route::get('/kamar', [RoomController::class, 'index'])->name('kamar.index');
+Route::get('/kamar/{id}', [RoomController::class, 'show'])->name('kamar.show');
+Route::post('/kamar/{id}/rating', [RoomController::class, 'rate'])->name('kamar.rate');
 
-    Route::get('/kamar/{id}/edit', [RoomController::class, 'edit'])
-        ->name('kamar.edit');
+// Pembayaran
+Route::get('/pembayaran', function () {
+    $pembayaran = null;
+    return view('user.pembayaran', compact('pembayaran'));
+})->name('pembayaran');
 
-    Route::patch('/kamar/{id}', [RoomController::class, 'update'])
-        ->name('kamar.update');
+// Kontrak
+Route::get('/kontrak', [SewaController::class, 'index'])->name('kontrak');
 
-    Route::delete('/kamar/{id}', [RoomController::class, 'destroy'])
-        ->name('kamar.destroy');
-});
+Route::get('/penyewa', function () {
+    return redirect()->route('kontrak');
+})->name('penyewa');
 
-/*
-|--------------------------------------------------------------------------
-| PENYEWA
-|--------------------------------------------------------------------------
-*/
+// Notifikasi
+Route::get('/notifikasi', [NotificationController::class, 'index'])->name('notifikasi');
 
-Route::middleware(['auth', 'penyewa'])->group(function () {
+Route::get('/cek-reminder', [ReminderController::class, 'check']);
 
-    Route::get('/dashboard-user', function () {
-        return view('dashboard.penyewa');
-    })->name('dashboard.user');
-
-    // Data Kamar
-    Route::get('/kamar', [RoomController::class, 'index'])
-        ->name('kamar.index');
-
-    Route::get('/kamar/{id}', [RoomController::class, 'show'])
-        ->name('kamar.show');
-
-    Route::post('/kamar/{id}/rating', [RoomController::class, 'rate'])
-        ->name('kamar.rate');
-
-    // Pembayaran
-    Route::get('/pembayaran', function () {
-
-        $pembayaran = null;
-
-        return view('user.pembayaran', compact('pembayaran'));
-
-    })->name('pembayaran');
-
-    // Kontrak
-    Route::get('/kontrak', function () {
-
-        $sewa = [
-            [
-                'nama' => 'Ahda',
-                'kamar' => 'Thursina 1',
-                'mulai' => '01-01-2026',
-                'jatuh_tempo' => '01-07-2026',
-                'status' => 'Aktif'
-            ]
-        ];
-
-        return view('user.kontrak', compact('sewa'));
-
-    })->name('kontrak');
-
-    Route::get('/penyewa', function () {
-        return redirect()->route('kontrak');
-    })->name('penyewa');
-
-    // Notifikasi
-    Route::get('/notifikasi', [NotificationController::class, 'index'])
-        ->name('notifikasi');
-
-    Route::get('/cek-reminder', [ReminderController::class, 'check']);
-});
-
-/*
-|--------------------------------------------------------------------------
-| SEMUA USER LOGIN
-|--------------------------------------------------------------------------
-*/
 
 Route::middleware('auth')->group(function () {
 

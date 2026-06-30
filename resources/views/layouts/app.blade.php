@@ -40,9 +40,6 @@
         }
 
 
-
-        /* NAVBAR */
-
         .navbar {
 
             height: 70px;
@@ -89,11 +86,6 @@
 
         }
 
-
-
-
-
-        /* SIDEBAR */
 
 
         .sidebar {
@@ -170,12 +162,6 @@
         }
 
 
-
-
-
-        /* CONTENT */
-
-
         .main-content {
 
 
@@ -200,10 +186,6 @@
 
         }
 
-
-
-
-        /* FOOTER */
 
 
         footer {
@@ -233,11 +215,6 @@
 
 
         }
-
-
-
-
-        /* MOBILE */
 
 
         @media(max-width:992px) {
@@ -284,9 +261,7 @@
 <body>
 
 
-
-    <!-- NAVBAR -->
-
+    //navbar
 
     <nav class="navbar">
 
@@ -366,25 +341,23 @@
 
 
 
-
-
-
-    <!-- SIDEBAR -->
-
-
+    //siedebar
     <div id="sidebar"
         class="sidebar">
 
+        @if(Auth::user()->role == 'admin')
 
+        Menu Admin
 
-        <a href="{{ Auth::user()->role=='admin'
-? route('profil.admin')
-: route('profil') }}">
+        @else
 
+        Menu Penyewa
 
-            <i class="fa fa-user"></i>
+        @endif
 
-            Profil
+        <i class="fa fa-user"></i>
+
+        Profil
 
 
         </a>
@@ -394,9 +367,9 @@
 
 
 
-        <a href="{{ Auth::user()->role=='admin'
-? route('dashboard.admin')
-: route('dashboard.user') }}">
+            <a href="{{ Auth::user()->role=='admin'
+    ? route('dashboard.admin')
+    : route('dashboard.user') }}">
 
 
             <i class="fa fa-dashboard"></i>
@@ -406,12 +379,6 @@
 
         </a>
 
-
-
-
-
-
-
         <a href="/kamar">
 
 
@@ -419,13 +386,7 @@
 
             Kamar
 
-
         </a>
-
-
-
-
-
 
 
         <a href="/penyewa">
@@ -435,120 +396,45 @@
 
             Data Sewa
 
-
         </a>
-
-
-
-
-
-
-
 
         <a href="/notifikasi">
-
-
             <i class="fa fa-bell"></i>
-
             Notifikasi
-
-
         </a>
-
-
-
-
-
-
 
         @if(Auth::user()->role=='admin')
-
-
-
         <a href="/pembayaran">
-
-
             <i class="fa fa-money-bill"></i>
-
             Pembayaran
-
-
         </a>
-
-
-
-
-
-
         <a href="/laporan">
-
 
             <i class="fa fa-chart-bar"></i>
 
             Laporan
-
-
         </a>
-
-
 
         @endif
 
-
-
-
-
-
     </div>
 
 
-
-
-
-
-
-
-
-    <!-- ISI HALAMAN -->
-
-
+    // isi halaman
     <div id="content"
         class="main-content">
 
-
         @yield('content')
-
 
     </div>
 
-
-
-
-
-
-
-
-
     <footer id="footer">
-
 
         © 2026 Sistem Manajemen Kos Kontrakan
 
-
     </footer>
 
-
-
-
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
 
     <script>
         function toggleMenu() {
@@ -565,23 +451,16 @@
             let footer =
                 document.getElementById('footer');
 
-
-
             sidebar.classList.toggle('hide');
 
             content.classList.toggle('full');
 
             footer.classList.toggle('full');
 
-
         }
     </script>
 
-
-
     @yield('scripts')
-
-
 
 </body>
 
