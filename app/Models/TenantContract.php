@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class TenantContract extends Model
 {
 
     protected $fillable = [
 
+        'user_id',
         'room_id',
         'tenant_name',
         'id_number',
@@ -38,6 +40,14 @@ class TenantContract extends Model
         return $this->hasMany(
             Reminder::class,
             'contract_id'
+        );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(
+            User::class,
+            'user_id'
         );
     }
 

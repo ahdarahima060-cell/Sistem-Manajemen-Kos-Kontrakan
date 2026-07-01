@@ -148,7 +148,7 @@
             <hr>
 
 
-            //Rating kamar
+
 
             <h4 class="fw-bold">
 

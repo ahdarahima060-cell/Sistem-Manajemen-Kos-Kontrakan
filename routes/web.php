@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\TenantContract;
 use App\Models\User;
 
 use App\Http\Controllers\DashboardController;
@@ -50,20 +51,19 @@ Route::post('/login', function (Request $request) {
         'password' => 'required',
     ]);
 
-    if (Auth::attempt($data)) {
-
-        $request->session()->regenerate();
-
-        if (Auth::user()->role == 'admin') {
-            return redirect()->route('dashboard.admin');
-        }
-
-        return redirect()->route('dashboard.user');
+    if (!Auth::attempt($data)) {
+        return back()->withErrors([
+            'email' => 'Email atau password salah'
+        ]);
     }
 
-    return back()->withErrors([
-        'email' => 'Email atau password salah'
-    ]);
+    $request->session()->regenerate();
+
+    if (Auth::user()->role === 'admin') {
+        return redirect()->route('dashboard.admin');
+    }
+
+    return redirect()->route('dashboard.user');
 
 })->name('login.attempt');
 
@@ -91,14 +91,12 @@ Route::get('/kamar/{id}/edit', [RoomController::class, 'edit'])->name('kamar.edi
 Route::patch('/kamar/{id}', [RoomController::class, 'update'])->name('kamar.update');
 Route::delete('/kamar/{id}', [RoomController::class, 'destroy'])->name('kamar.destroy');
 
-Route::get('/dashboard-user', function () {
-    return view('dashboard.penyewa');
-})->name('dashboard.user');
+Route::get('/dashboard-user', [DashboardController::class, 'user'])->name('dashboard.user');
 
 // Data Kamar
 Route::get('/kamar', [RoomController::class, 'index'])->name('kamar.index');
 Route::get('/kamar/{id}', [RoomController::class, 'show'])->name('kamar.show');
-Route::post('/kamar/{id}/rating', [RoomController::class, 'rate'])->name('kamar.rate');
+Route::post('/kamar/{id}/rating', [RoomController::class, 'rate'])->name('kamar.rate')->middleware('auth');
 
 // Pembayaran
 Route::get('/pembayaran', function () {
@@ -108,6 +106,13 @@ Route::get('/pembayaran', function () {
 
 // Kontrak
 Route::get('/kontrak', [SewaController::class, 'index'])->name('kontrak');
+Route::get('/kontrak/create', [SewaController::class, 'create'])->name('kontrak.create')->middleware('auth');
+Route::post('/kontrak', [SewaController::class, 'store'])->name('kontrak.store')->middleware('auth');
+Route::get('/kontrak/{id}/edit', [SewaController::class, 'edit'])->name('kontrak.edit')->middleware('auth');
+Route::patch('/kontrak/{id}', [SewaController::class, 'update'])->name('kontrak.update')->middleware('auth');
+Route::delete('/kontrak/{id}', [SewaController::class, 'destroy'])->name('kontrak.destroy')->middleware('auth');
+Route::get('/kontrak/{id}', [SewaController::class, 'detail'])->name('penyewa.detail')->middleware('auth');
+Route::post('/kontrak/{id}/notif', [SewaController::class, 'kirimNotif'])->name('penyewa.notif')->middleware('auth');
 
 Route::get('/penyewa', function () {
     return redirect()->route('kontrak');
@@ -115,6 +120,21 @@ Route::get('/penyewa', function () {
 
 // Notifikasi
 Route::get('/notifikasi', [NotificationController::class, 'index'])->name('notifikasi');
+
+Route::get('/laporan', function () {
+    return view('dashboard.laporan', [
+        'totalRooms' => 0,
+        'availableRooms' => 0,
+        'occupiedRooms' => 0,
+        'maintenanceRooms' => 0,
+        'activeContracts' => 0,
+        'pendingReminders' => 0,
+        'totalPaidPayments' => 0,
+        'currentMonthExpenses' => 0,
+        'totalInvoices' => 0,
+        'unpaidInvoices' => 0,
+    ]);
+})->name('laporan');
 
 Route::get('/cek-reminder', [ReminderController::class, 'check']);
 

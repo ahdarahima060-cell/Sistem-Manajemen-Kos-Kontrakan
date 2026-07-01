@@ -117,7 +117,7 @@
             <p class="text-center text-muted mb-4">
                 Silakan masuk untuk melanjutkan ke akun Anda
             </p>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login.attempt') }}">
 
                 @csrf
 
@@ -137,7 +137,7 @@
                     <input
                         type="password"
                         name="password"
-                        class="form-control
+                        class="form-control"
                         placeholder="Masukkan password Anda">
                 </div>
                 <div class="d-flex justify-content-between mb-4">

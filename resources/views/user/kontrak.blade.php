@@ -16,6 +16,11 @@
                 Informasi penyewa dan masa sewa kamar.
             </p>
         </div>
+        @if(Auth::user()->role === 'admin')
+            <div class="col text-end">
+                <a href="{{ route('kontrak.create') }}" class="btn btn-pink">Tambah Kontrak</a>
+            </div>
+        @endif
     </div>
 
     @if(session('success'))
@@ -58,7 +63,7 @@
                             </td>
 
                             <td>
-                                {{ $item->room->room_name ?? '-' }}
+                                {{ $item->room->room_code ?? '-' }}
                             </td>
 
                             <td>
@@ -99,21 +104,48 @@
 
                                 </a>
 
-                                <form action="{{ route('penyewa.notif', $item->id) }}"
-                                    method="POST"
-                                    class="d-inline">
+                                @if(Auth::user()->role === 'admin')
+                                    <a href="{{ route('kontrak.edit', $item->id) }}" class="btn btn-secondary btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </a>
+                                @endif
 
-                                    @csrf
+                                @if(Auth::user()->role === 'admin' || Auth::id() === $item->user_id)
+                                    <form action="{{ route('penyewa.notif', $item->id) }}"
+                                        method="POST"
+                                        class="d-inline">
 
-                                    <button type="submit"
-                                        class="btn btn-warning btn-sm">
+                                        @csrf
 
-                                        <i class="fas fa-bell"></i>
-                                        Kirim Notifikasi
+                                        <button type="submit"
+                                            class="btn btn-warning btn-sm">
 
-                                    </button>
+                                            <i class="fas fa-bell"></i>
+                                            Kirim Notifikasi
 
-                                </form>
+                                        </button>
+
+                                    </form>
+                                @endif
+
+                                @if(Auth::user()->role === 'admin')
+                                    <form action="{{ route('kontrak.destroy', $item->id) }}"
+                                        method="POST"
+                                        class="d-inline">
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Yakin ingin menghapus data sewa ini?');">
+                                            <i class="fas fa-trash"></i>
+                                            Hapus
+                                        </button>
+
+                                    </form>
+                                @endif
 
                             </td>
 

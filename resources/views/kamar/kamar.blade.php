@@ -160,35 +160,21 @@
                         </td>
 
                         <td>
+                            @if($room->status == 'available')
+                                <span class="badge bg-success">Tersedia</span>
+                            @elseif($room->status == 'occupied')
+                                @php
+                                    $isOwner = Auth::check() && \App\Models\TenantContract::where('room_id', $room->id)->where('user_id', Auth::id())->exists();
+                                @endphp
 
-
-                            @if($room->status=='available')
-
-
-                            <span class="badge bg-success">
-                                Tersedia
-                            </span>
-
-
-                            @elseif($room->status=='occupied')
-
-
-                            <span class="badge bg-warning">
-                                Dipesan
-                            </span>
-
-
+                                @if($isOwner)
+                                    <span class="badge bg-warning">Dipesan</span>
+                                @else
+                                    <span class="badge bg-secondary">Sudah Terisi</span>
+                                @endif
                             @else
-
-
-                            <span class="badge bg-danger">
-                                Perawatan
-                            </span>
-
-
+                                <span class="badge bg-danger">Perawatan</span>
                             @endif
-
-
                         </td>
 
 
@@ -209,11 +195,12 @@
                             </a>
 
                             @if(Auth::user()->role=='admin')
-
-
-                            <form action="{{route('kamar.destroy',$room->id)}}"
-                                method="POST"
-                                class="d-inline">
+                                <a href="{{ route('kamar.edit', $room->id) }}" class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+                                <form action="{{route('kamar.destroy',$room->id)}}"
+                                    method="POST"
+                                    class="d-inline">
 
 
                                 @csrf
